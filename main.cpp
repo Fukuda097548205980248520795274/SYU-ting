@@ -84,6 +84,63 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	    変数を作り、初期値を入れる
 	-----------------------------*/
 
+	/*   ゲーム   */
+
+	// ゲームが動いているかどうか（ゲームフラグ）
+	int isGameOperation = false;
+
+	// ゲームフレーム
+	int gameFrame = 0;
+
+	// ステージフレーム
+	int stageFrame = 0;
+
+
+	/*   画面   */
+
+	// 画面の種類
+	enum SCREEN_TYPE
+	{
+		SCREEN_TYPE_ORPNING,
+		SCREEN_TYPE_START,
+		SCREEN_TYPE_GAME,
+		SCREEN_TYPE_END
+	};
+
+	// 現在の画面
+	int screenNo = SCREEN_TYPE_START;
+
+	// スタート画面の種類
+	enum START_TYPE
+	{
+		START_TYPE_TITLE,
+		START_TYPE_MAIN
+	};
+
+	// 現在のスタート画面
+	int startNo = START_TYPE_TITLE;
+
+	// メニューの種類
+	enum MENU_TYPE
+	{
+		MENU_TYPE_TITLE,
+		MENU_TYPE_GAME_START
+	};
+
+	// 現在のメニュー
+	int menuNo = MENU_TYPE_TITLE;
+
+	// ステージの種類
+	enum STAGE_TYPE
+	{
+		STAGE_TYPE_TUTORIAL,
+		STAGE_TYPE_1,
+	};
+
+	// 現在のステージ
+	int stageNo = -1;
+
+
 	/*   プレイヤー   */
 
 	// 構造体
@@ -119,6 +176,145 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		/*--------------
+		    画面操作
+		--------------*/
+
+		// ゲームが動いている（ゲームフラグがtrueである）ときに、ゲームフラグを進める
+		if (isGameOperation)
+		{
+			gameFrame++;
+		}
+
+		// 画面切り替え
+		switch (screenNo)
+		{
+		case SCREEN_TYPE_ORPNING:
+
+			///
+			/// ↓ オープニング画面ここから
+			/// 
+
+			///
+			/// ↑ オープニング画面ここまで
+			/// 
+
+			break;
+
+		case SCREEN_TYPE_START:
+
+			///
+			/// ↓ スタート画面ここから
+			/// 
+
+			// スタート画面切り替え
+			switch (startNo)
+			{
+			case START_TYPE_TITLE:
+
+				/*   タイトル画面   */
+
+				if (menuNo == MENU_TYPE_TITLE)
+				{
+					// スペースキーで、チュートリアルに進む
+					if (!preKeys[DIK_SPACE] && keys[DIK_SPACE])
+					{
+						if (isGameOperation == false)
+						{
+							// ゲームが動く（ゲームフラグがtrueになる）
+							isGameOperation = true;
+						}
+					}
+
+					// 50フレームで状態遷移する
+					if (isGameOperation)
+					{
+						if (gameFrame >= 50)
+						{
+							// ゲーム画面に移る
+							screenNo = SCREEN_TYPE_GAME;
+
+							// チュートリアルステージ
+							stageNo = STAGE_TYPE_TUTORIAL;
+
+
+							// メイン画面に移る
+							startNo = START_TYPE_MAIN;
+
+							// ゲームスタートを選ぶ
+							menuNo = MENU_TYPE_GAME_START;
+
+
+							// ゲームが止まる（ゲームフラグがfalseになる）
+							isGameOperation = false;
+
+							// ゲームフレームが初期化される
+							gameFrame = 0;
+						}
+					}
+				}
+
+				break;
+
+			case START_TYPE_MAIN:
+
+				/*   メイン画面   */
+
+				break;
+			}
+
+			///
+			/// ↑ スタート画面ここまで
+			/// 
+
+			break;
+
+		case SCREEN_TYPE_GAME:
+
+			///
+			/// ↓ ゲーム画面ここから
+			/// 
+
+			/*-----------------
+			    ステージ設定
+			-----------------*/
+
+			switch (stageNo)
+			{
+			case STAGE_TYPE_TUTORIAL:
+
+				/*   チュートリアル   */
+
+				break;
+
+			case STAGE_TYPE_1:
+
+				/*   ステージ1   */
+
+				break;
+			}
+
+			stageFrame++;
+
+			///
+			/// ↑ ゲーム画面ここまで
+			/// 
+
+			break;
+
+		case SCREEN_TYPE_END:
+
+			///
+			/// ↓ ゲーム終了画面ここから
+			/// 
+
+			///
+			/// ↑ ゲーム終了画面ここまで
+			/// 
+
+			break;
+		}
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -126,6 +322,58 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
+
+		// 画面切り替え
+		switch (screenNo)
+		{
+		case SCREEN_TYPE_ORPNING:
+
+			///
+			/// ↓ オープニング画面ここから
+			/// 
+
+			///
+			/// ↑ オープニング画面ここまで
+			/// 
+
+			break;
+
+		case SCREEN_TYPE_START:
+
+			///
+			/// ↓ スタート画面ここから
+			/// 
+
+			///
+			/// ↑ スタート画面ここまで
+			/// 
+
+			break;
+
+		case SCREEN_TYPE_GAME:
+
+			///
+			/// ↓ ゲーム画面ここから
+			/// 
+
+			///
+			/// ↑ ゲーム画面ここまで
+			/// 
+
+			break;
+
+		case SCREEN_TYPE_END:
+
+			///
+			/// ↓ ゲーム終了画面ここから
+			/// 
+
+			///
+			/// ↑ ゲーム終了画面ここまで
+			/// 
+
+			break;
+		}
 
 		///
 		/// ↑描画処理ここまで
