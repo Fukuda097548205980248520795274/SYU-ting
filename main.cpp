@@ -1,12 +1,23 @@
 #include <Novice.h>
 
-const char kWindowTitle[] = "LC1C_20_フクダソウワ_タイトル";
+const char kWindowTitle[] = "宗てぃんぐ";
+
+/*---------------
+    定数を作る
+---------------*/
+
+// 画面の横幅
+const int kGameScreenWidth = 600;
+
+// 画面の縦幅
+const int kGameScreenHeight = 700;
+
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
-	Novice::Initialize(kWindowTitle, 1280, 720);
+	Novice::Initialize(kWindowTitle, kGameScreenWidth + 300, kGameScreenHeight);
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
