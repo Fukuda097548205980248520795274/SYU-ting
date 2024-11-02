@@ -2,11 +2,23 @@
 
 const char kWindowTitle[] = "宗てぃんぐ";
 
+
+/*---------------
+    定数を作る
+---------------*/
+
+// 画面の横幅
+const int kScreenWitdh = 600;
+
+// 画面の縦幅
+const int kScreenHeight = 720;
+
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
-	Novice::Initialize(kWindowTitle, 1280, 720);
+	Novice::Initialize(kWindowTitle, kScreenWitdh, kScreenHeight);
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
