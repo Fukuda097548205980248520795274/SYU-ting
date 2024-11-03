@@ -1,5 +1,7 @@
 #include <Novice.h>
+#include "Structure.h"
 #include "Constant.h"
+#include "Matrix.h"
 
 const char kWindowTitle[] = "宗てぃんぐ";
 
